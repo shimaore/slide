@@ -6,51 +6,17 @@ function trimIndent(s) {
 		var trim = s.substring(0, indent);
 		return s.replace(new RegExp(trim, 'g'), '');
 	}
+  return s;
 }
 
 function renderSlide(root, slide, index) {
+  var html = marked(slide,{gfm:true,tables:true,breaks:true,smartLists:true,smartypants:true})
 	var lines = slide.split('\n');
 	var emSpanStart = -1;
 	var slideWrapper = document.createElement('div');
 	var slideContent = document.createElement('div');
-	var html = '';
 	slideWrapper.className = 'slide slide-'+index;
 	slideContent.className = 'slide-content';
-	for (var i = 0 ; i < lines.length; i++) {
-		var line = lines[i];
-		if (line.startsWith('#')) {
-			// Add header
-			html = html + '<h1>' + line.substring(1) + '</h1>';
-		} else if (line.startsWith('  ') || line.startsWith('\t')) {
-			// Add code
-			html = html + '<pre>' + line.replace(/^(  )|\t/,'') + '</pre>';
-		} else {
-			// Unquote dot-quoted lines
-			if (line.startsWith('.')) {
-				line = line.substring(1);
-			}
-			// Handle emphasis
-			for (var j = 0; j < line.length; j++) {
-				var c = line.charAt(j);
-				if (c == '*') {
-					if (emSpanStart == -1) {
-						html = html + '<strong>';
-						emSpanStart = html.length;
-					} else {
-						if (emSpanStart != html.length) {
-							html = html + '</strong>';
-						} else {
-							html = html.substring(0, html.length-8) + '*';
-						}
-						emSpanStart = -1;
-					}
-				} else {
-					html = html + c;
-				}
-			}
-			html = html + '<br/>';
-		}
-	}
 	slideContent.innerHTML = html;
 	slideWrapper.appendChild(slideContent);
 	root.appendChild(slideWrapper);
