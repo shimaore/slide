@@ -39,3 +39,24 @@
 		visibility: visible !important;
 	}
 }
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #edd400;
+  color: #453029;
+  line-height: 1.54;
+}
+.slide h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 2.6rem;
+}
+.slide pre {
+  font-family: 'Inconsolata';
+  font-size: 0.6rem;
+  line-height: 1.1;
+}
